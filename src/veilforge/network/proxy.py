@@ -1,5 +1,5 @@
 """
-Network / Privacy Layer - Proxy support for AegisAgent.
+Network / Privacy Layer - Proxy support for VeilForge.
 
 This module will handle HTTP, HTTPS, SOCKS5 proxies,
 proxy chaining, and optional Tor routing.

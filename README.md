@@ -2,24 +2,20 @@
 
 **Autonomous AI Red Teaming & Agentic Security Assessment Platform**
 
-[![Status](https://img.shields.io/badge/Status-Concept%20%2F%20Early%20Design-orange)]()
-[![Python](https://img.shields.io/badge/Python-3.11%2B-blue)]()
-[![License](https://img.shields.io/badge/License-MIT-green)]()
+![Status](https://img.shields.io/badge/Status-Concept%20%2F%20Early%20Design-orange)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 VeilForge is an open-core platform for systematically testing and securing **Large Language Models (LLMs)** and **autonomous AI agents**. It focuses on the emerging attack surface created by tool-using, multi-agent, and memory-enabled AI systems.
 
-> **Current Status:** Concept / Early Design  
+> **Current Status:** Concept / Early Design — no functional release yet.
 > **Goal:** Help security teams, red teamers, and AI engineers discover prompt injection, tool abuse, memory poisoning, goal hijacking, and related risks — before real attackers do.
 
 ---
 
 ## Table of Contents
 
-<<<<<<< HEAD
-- [Why VeilForge?](#why-VeilForge)
-=======
 - [Why VeilForge?](#why-veilforge)
->>>>>>> e086ccf (Complete rename from AegisAgent to VeilForge)
 - [Core Capabilities](#core-capabilities)
 - [High-Level Architecture](#high-level-architecture)
 - [Target Users](#target-users)
@@ -27,6 +23,7 @@ VeilForge is an open-core platform for systematically testing and securing **Lar
 - [Development Roadmap](#development-roadmap)
 - [Related Work](#related-work)
 - [Ethical Use & Responsible Disclosure](#ethical-use--responsible-disclosure)
+- [Project Documents](#project-documents)
 - [Contributing](#contributing)
 - [License](#license)
 - [Disclaimer](#disclaimer)
@@ -36,6 +33,7 @@ VeilForge is an open-core platform for systematically testing and securing **Lar
 ## Why VeilForge?
 
 Traditional application security tools were not designed for systems that:
+
 - Accept natural language instructions
 - Call tools and APIs autonomously
 - Maintain long-term memory or RAG context
@@ -48,12 +46,14 @@ As organizations deploy agentic AI into production, a new class of risks has app
 ## Core Capabilities
 
 ### Offensive Testing
+
 - Automated and multi-turn attack campaigns against LLMs and AI agents
 - Coverage of direct & indirect prompt injection, jailbreaks, tool misuse, memory/RAG poisoning, goal hijacking, and data exfiltration
 - Extensible probe library (builds on and extends research tools such as Garak and PyRIT)
 - Simulation of realistic agent environments (tools, memory stores, RAG pipelines)
 
 ### Analysis & Reporting
+
 - Automatic mapping of findings to:
   - OWASP Top 10 for LLM Applications
   - OWASP risks for Agentic AI
@@ -64,12 +64,14 @@ As organizations deploy agentic AI into production, a new class of risks has app
 - Attack path visualization
 
 ### Integration & Continuous Testing
+
 - CI/CD plugins (GitHub Actions, GitLab CI, and others)
 - Scheduled continuous assessment mode
 - API access for integration into existing security workflows
 - Support for both self-hosted and cloud deployments
 
 ### Privacy & Network Features
+
 - Built-in support for HTTP, HTTPS, and SOCKS5 proxies
 - Proxy chaining (multiple proxies in sequence)
 - Optional Tor routing
@@ -83,73 +85,73 @@ As organizations deploy agentic AI into production, a new class of risks has app
 
 ## High-Level Architecture
 
-<<<<<<< HEAD
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Presentation Layer                       │
 │         CLI  •  Web Dashboard  •  REST / API                │
 └────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│                   Orchestration Layer                       │
-│     Campaign Manager  •  Scheduler  •  Result Aggregator    │
+                              │
+┌─────────────────────────────▼───────────────────────────────┐
+│                   Orchestration Layer                        │
+│     Campaign Manager  •  Scheduler  •  Result Aggregator     │
 └────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│                     Attack Engine                           │
-│   Probe Library  •  Multi-turn Runners  •  Agent Simulators │
+                              │
+┌─────────────────────────────▼───────────────────────────────┐
+│                     Attack Engine                             │
+│   Probe Library  •  Multi-turn Runners  •  Agent Simulators  │
 └────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│               Network / Privacy Layer                       │
-│     HTTP/SOCKS5 Proxies  •  Proxy Chains  •  Tor Support    │
+                              │
+┌─────────────────────────────▼───────────────────────────────┐
+│               Network / Privacy Layer                        │
+│     HTTP/SOCKS5 Proxies  •  Proxy Chains  •  Tor Support     │
 └────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│                   Connector Layer                           │
-│   LLM Providers  •  Agent Frameworks  •  Custom Targets     │
+                              │
+┌─────────────────────────────▼───────────────────────────────┐
+│                   Connector Layer                             │
+│   LLM Providers  •  Agent Frameworks  •  Custom Targets      │
 └────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│              Analysis, Scoring & Reporting                  │
-│   Framework Mapping  •  Severity  •  PDF / JSON Reports     │
-└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────▼───────────────────────────────┐
+│              Analysis, Scoring & Reporting                   │
+│   Framework Mapping  •  Severity  •  PDF / JSON Reports      │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## Target Users
 
-| User Group                        | Benefit                                              |
-|-----------------------------------|------------------------------------------------------|
-| AI / ML Security Engineers        | Systematically test production AI agents             |
-| Red Team & Offensive Security     | Expand testing into the AI attack surface            |
-| AppSec / Product Security Teams   | Integrate AI testing into the SDLC and CI/CD         |
-| Compliance & GRC Teams            | Generate evidence mapped to emerging AI regulations  |
-| Security Researchers & Educators  | Explore techniques and train others                  |
+| User Group | Benefit |
+|---|---|
+| AI / ML Security Engineers | Systematically test production AI agents |
+| Red Team & Offensive Security | Expand testing into the AI attack surface |
+| AppSec / Product Security Teams | Integrate AI testing into the SDLC and CI/CD |
+| Compliance & GRC Teams | Generate evidence mapped to emerging AI regulations |
+| Security Researchers & Educators | Explore techniques and train others |
 
 ---
 
 ## Technology Stack (Planned)
 
-| Layer              | Choices                                      |
-|--------------------|----------------------------------------------|
-| Core Language      | Python 3.11+                                 |
-| API Framework      | FastAPI                                      |
-| Frontend           | Next.js + React + Tailwind                   |
-| Database           | PostgreSQL + Redis                           |
-| Task Queue         | Celery / ARQ or equivalent                   |
-| Agent Frameworks   | LangChain, LlamaIndex, CrewAI, AutoGen       |
-| LLM Interfaces     | OpenAI, Anthropic, LiteLLM, Ollama, etc.     |
-| Reporting          | ReportLab / WeasyPrint + structured JSON     |
+| Layer | Choices |
+|---|---|
+| Core Language | Python 3.11+ |
+| API Framework | FastAPI |
+| Frontend | Next.js + React + Tailwind |
+| Database | PostgreSQL + Redis |
+| Task Queue | Celery / ARQ or equivalent |
+| Agent Frameworks | LangChain, LlamaIndex, CrewAI, AutoGen |
+| LLM Interfaces | OpenAI, Anthropic, LiteLLM, Ollama, etc. |
+| Reporting | ReportLab / WeasyPrint + structured JSON |
 | Networking/Privacy | `httpx`, `aiohttp`, `python-socks`, Tor support |
-| Packaging          | Docker + Docker Compose (later Helm)         |
+| Packaging | Docker + Docker Compose (later Helm) |
 
 ---
 
 ## Development Roadmap
 
 ### Phase 1 – MVP
+
 - CLI interface
 - Core probe set covering major agentic risks
 - Basic connectors (e.g. OpenAI + LangChain-style agents)
@@ -159,6 +161,7 @@ As organizations deploy agentic AI into production, a new class of risks has app
 - Clear extension points for new probes
 
 ### Phase 2 – Advanced
+
 - Web dashboard
 - Multi-agent attack orchestration
 - Continuous testing mode
@@ -167,6 +170,7 @@ As organizations deploy agentic AI into production, a new class of risks has app
 - Better framework mapping and remediation guidance
 
 ### Phase 3 – Product
+
 - Multi-tenant SaaS offering
 - Team collaboration features
 - Enterprise capabilities (SSO, private models, advanced compliance)
@@ -176,21 +180,21 @@ As organizations deploy agentic AI into production, a new class of risks has app
 
 ## Related Work
 
-AegisAgent builds on and aims to complement existing excellent tools:
+VeilForge builds on and aims to complement existing excellent tools:
 
-| Tool          | Strength                              | Limitation                              | How AegisAgent Differs                  |
-|---------------|---------------------------------------|-----------------------------------------|-----------------------------------------|
-| **Garak**     | Broad probe library, easy to run     | Limited multi-agent & tool-use focus   | Stronger focus on full agent workflows |
-| **PyRIT**     | Excellent multi-turn orchestration   | More of a framework than full platform | End-to-end reporting + CI/CD focus     |
-| **Promptfoo** | Great for CI and eval                | Less depth on agentic risks            | Deeper agentic attack surface coverage |
+| Tool | Strength | Limitation | How VeilForge Differs |
+|---|---|---|---|
+| **Garak** | Broad probe library, easy to run | Limited multi-agent & tool-use focus | Stronger focus on full agent workflows |
+| **PyRIT** | Excellent multi-turn orchestration | More of a framework than full platform | End-to-end reporting + CI/CD focus |
+| **Promptfoo** | Great for CI and eval | Less depth on agentic risks | Deeper agentic attack surface coverage |
 
-AegisAgent’s goal is not to replace these tools, but to provide a more complete **platform experience** focused on agentic systems, professional reporting, continuous testing, and operational privacy features.
+VeilForge's goal is not to replace these tools, but to provide a more complete **platform experience** focused on agentic systems, professional reporting, continuous testing, and operational privacy features.
 
 ---
 
 ## Ethical Use & Responsible Disclosure
 
-AegisAgent is intended **only** for:
+VeilForge is intended **only** for:
 
 - Authorized security testing
 - Research
@@ -200,7 +204,7 @@ AegisAgent is intended **only** for:
 
 Proxy, Tor, and anonymity features are provided solely to support legitimate operational security during authorized engagements. They do not provide any legal protection for unauthorized activity.
 
-We will publish a clear `SECURITY.md` file with instructions for reporting vulnerabilities in AegisAgent itself once the codebase is public.
+A `SECURITY.md` file is included in this repository with instructions for reporting vulnerabilities in VeilForge itself.
 
 All users are expected to follow applicable laws, organizational policies, and responsible disclosure practices.
 
@@ -210,17 +214,17 @@ All users are expected to follow applicable laws, organizational policies, and r
 
 Additional documentation available in this repository:
 
-- [Project Overview (PDF)](VeilForge_Project_Overview.pdf) – High-level explanation
-- [Technical Architecture (PDF)](VeilForge_Technical_Architecture.pdf) – Deeper technical design
-- [Monetization & Business Potential (PDF)](VeilForge_Monetization_Business.pdf) – Strategy notes
+- [Project Overview (PDF)](https://github.com/abdullah-shahzaib560-lgtm/VeilForge/blob/main/VeilForge_Project_Overview.pdf) – High-level explanation
+- [Technical Architecture (PDF)](https://github.com/abdullah-shahzaib560-lgtm/VeilForge/blob/main/VeilForge_Technical_Architecture.pdf) – Deeper technical design
+- [Monetization & Business Potential (PDF)](https://github.com/abdullah-shahzaib560-lgtm/VeilForge/blob/main/VeilForge_Monetization_Business.pdf) – Strategy notes
 
 ---
 
 ## Contributing
 
-This project is currently in early design.  
+This project is currently in early design.
 
-Once the initial repository structure is ready, we will welcome contributions in the following areas:
+Once the initial repository structure is ready, contributions will be welcome in the following areas:
 
 - New attack probes and techniques
 - Connectors for additional agent frameworks
@@ -229,27 +233,22 @@ Once the initial repository structure is ready, we will welcome contributions in
 - Documentation, examples, and tutorials
 - Testing and feedback
 
-A full `CONTRIBUTING.md` will be added soon.
+See `CONTRIBUTING.md` for details (in progress).
 
 ---
 
 ## License
 
-License to be determined.  
-Current plan: Permissive open-source license for the core, with commercial options for advanced enterprise features (open-core model).
+The core VeilForge engine, probe library, and CLI are released under the **MIT License** (see `LICENSE`).
+
+Advanced enterprise features (planned for later phases — e.g. SSO, private model support, advanced compliance reporting, managed hosting) will be offered under a separate commercial license as part of an **open-core** model. The open-source core will always remain free to use, modify, and self-host under MIT terms.
 
 ---
 
 ## Disclaimer
 
-This software is provided for defensive security research and authorized testing only.  
-The authors and contributors assume no liability for misuse.  
-Always obtain proper written authorization before testing any system.
+This software is provided for defensive security research and authorized testing only. The authors and contributors assume no liability for misuse. Always obtain proper written authorization before testing any system.
 
 ---
 
-**AegisAgent** — Raising the security baseline for the next generation of intelligent systems.
-```
-
-=======
->>>>>>> e086ccf (Complete rename from AegisAgent to VeilForge)
+**VeilForge** — Raising the security baseline for the next generation of intelligent systems.

@@ -2,7 +2,7 @@
 Basic configuration handling for AegisAgent.
 """
 
-from pydantic import BaseModel,
+from pydantic import BaseModel
 from typing import Optional
 
 

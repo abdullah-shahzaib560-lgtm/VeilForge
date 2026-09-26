@@ -6,14 +6,14 @@ VeilForge is currently in early design stage.
 
 ### Ways to Get Support
 
-1. **GitHub Issues**  
+1. **GitHub Issues**
    Best place for bug reports and feature requests.
 
-2. **GitHub Discussions** (will be enabled later)  
+2. **GitHub Discussions** (will be enabled later)
    For general questions and ideas.
 
-3. **Documentation**  
-   Check the README and documents in the `docs/` folder.
+3. **Documentation**
+   Check the [README](README.md) and the project PDFs in the repository root (Project Overview, Technical Architecture, and Monetization & Business Potential).
 
 ## Response Time
 
@@ -25,5 +25,5 @@ In the future, commercial support and enterprise features may be offered under t
 
 ## Security Issues
 
-Please do **not** report security vulnerabilities through public issues.  
+Please do **not** report security vulnerabilities through public issues.
 See [SECURITY.md](SECURITY.md) for the proper process.

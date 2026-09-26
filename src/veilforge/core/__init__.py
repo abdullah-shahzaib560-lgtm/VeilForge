@@ -1,1 +1,1 @@
-"""Core components of AegisAgent."""
+"""Core components of VeilForge."""
