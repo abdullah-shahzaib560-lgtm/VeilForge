@@ -18,7 +18,7 @@ If you discover a security vulnerability in **VeilForge**, please report it resp
 
 We will acknowledge the report and work to address it as quickly as possible.
 
-## Responsible Use of AegisAgent
+## Responsible Use of VeilForge
 
 AegisAgent is intended **only** for:
 
