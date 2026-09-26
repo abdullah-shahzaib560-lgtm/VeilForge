@@ -22,9 +22,6 @@ class ProxyConfig:
 class ProxyManager:
     """
     Manages proxy configuration for outbound requests.
-    
-    In Phase 1 this will be a simple wrapper.
-    Later it will support chaining and Tor.
     """
 
     def __init__(self, config: Optional[ProxyConfig] = None):

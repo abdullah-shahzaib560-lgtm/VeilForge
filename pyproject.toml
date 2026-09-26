@@ -3,14 +3,14 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "aegisagent"
+name = "veilforge"
 version = "0.1.0-dev"
 description = "Autonomous AI Red Teaming & Agentic Security Assessment Platform"
 readme = "README.md"
 requires-python = ">=3.11"
-license = {text = "LicenseRef-Proprietary-TBD"}
+license = {text = "MIT"}
 authors = [
-    {name = "AegisAgent Contributors"}
+    {name = "VeilForge Contributors"}
 ]
 keywords = ["ai-security", "red-teaming", "llm", "agentic-ai", "prompt-injection"]
 classifiers = [
@@ -39,6 +39,9 @@ dev = [
     "black>=24.0.0",
     "ruff>=0.4.0",
 ]
+
+[project.scripts]
+veilforge = "veilforge.cli:app"
 
 [tool.setuptools.packages.find]
 where = ["src"]
