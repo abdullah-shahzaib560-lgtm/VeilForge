@@ -8,7 +8,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in **AegisAgent**, please report it responsibly.
+If you discover a security vulnerability in **VeilForge**, please report it responsibly.
 
 **Please do not** create public GitHub issues for security vulnerabilities.
 
