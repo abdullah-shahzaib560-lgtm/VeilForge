@@ -1,4 +1,4 @@
-# AegisAgent
+# VeilForge
 
 **Autonomous AI Red Teaming & Agentic Security Assessment Platform**
 
@@ -15,7 +15,7 @@ AegisAgent is an open-core platform for systematically testing and securing **La
 
 ## Table of Contents
 
-- [Why AegisAgent?](#why-aegisagent)
+- [Why VeilForge?](#why-VeilForge)
 - [Core Capabilities](#core-capabilities)
 - [High-Level Architecture](#high-level-architecture)
 - [Target Users](#target-users)
@@ -30,7 +30,7 @@ AegisAgent is an open-core platform for systematically testing and securing **La
 
 ---
 
-## Why AegisAgent?
+## Why VeilForge?
 
 Traditional application security tools were not designed for systems that:
 - Accept natural language instructions
@@ -206,9 +206,9 @@ All users are expected to follow applicable laws, organizational policies, and r
 
 Additional documentation available in this repository:
 
-- [Project Overview (PDF)](AegisAgent_Project_Overview.pdf) – High-level explanation
-- [Technical Architecture (PDF)](AegisAgent_Technical_Architecture.pdf) – Deeper technical design
-- [Monetization & Business Potential (PDF)](AegisAgent_Monetization_Business.pdf) – Strategy notes
+- [Project Overview (PDF)](VeilForge_Project_Overview.pdf) – High-level explanation
+- [Technical Architecture (PDF)](VeilForge_Technical_Architecture.pdf) – Deeper technical design
+- [Monetization & Business Potential (PDF)](VeilForge_Monetization_Business.pdf) – Strategy notes
 
 ---
 
