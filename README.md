@@ -4,9 +4,9 @@
 
 [![Status](https://img.shields.io/badge/Status-Concept%20%2F%20Early%20Design-orange)]()
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)]()
-[![License](https://img.shields.io/badge/License-TBD-lightgrey)]()
+[![License](https://img.shields.io/badge/License-MIT-green)]()
 
-AegisAgent is an open-core platform for systematically testing and securing **Large Language Models (LLMs)** and **autonomous AI agents**. It focuses on the emerging attack surface created by tool-using, multi-agent, and memory-enabled AI systems.
+VeilForge is an open-core platform for systematically testing and securing **Large Language Models (LLMs)** and **autonomous AI agents**. It focuses on the emerging attack surface created by tool-using, multi-agent, and memory-enabled AI systems.
 
 > **Current Status:** Concept / Early Design  
 > **Goal:** Help security teams, red teamers, and AI engineers discover prompt injection, tool abuse, memory poisoning, goal hijacking, and related risks — before real attackers do.
@@ -15,7 +15,11 @@ AegisAgent is an open-core platform for systematically testing and securing **La
 
 ## Table of Contents
 
+<<<<<<< HEAD
 - [Why VeilForge?](#why-VeilForge)
+=======
+- [Why VeilForge?](#why-veilforge)
+>>>>>>> e086ccf (Complete rename from AegisAgent to VeilForge)
 - [Core Capabilities](#core-capabilities)
 - [High-Level Architecture](#high-level-architecture)
 - [Target Users](#target-users)
@@ -23,7 +27,6 @@ AegisAgent is an open-core platform for systematically testing and securing **La
 - [Development Roadmap](#development-roadmap)
 - [Related Work](#related-work)
 - [Ethical Use & Responsible Disclosure](#ethical-use--responsible-disclosure)
-- [Project Documents](#project-documents)
 - [Contributing](#contributing)
 - [License](#license)
 - [Disclaimer](#disclaimer)
@@ -38,7 +41,7 @@ Traditional application security tools were not designed for systems that:
 - Maintain long-term memory or RAG context
 - Operate with high agency
 
-As organizations deploy agentic AI into production, a new class of risks has appeared. Most teams still rely on manual testing or basic scanners. AegisAgent is built to close this gap with automated and semi-automated adversarial testing, clear reporting, and continuous assessment capabilities.
+As organizations deploy agentic AI into production, a new class of risks has appeared. Most teams still rely on manual testing or basic scanners. VeilForge is built to close this gap with automated and semi-automated adversarial testing, clear reporting, and continuous assessment capabilities.
 
 ---
 
@@ -80,6 +83,7 @@ As organizations deploy agentic AI into production, a new class of risks has app
 
 ## High-Level Architecture
 
+<<<<<<< HEAD
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Presentation Layer                       │
@@ -247,3 +251,5 @@ Always obtain proper written authorization before testing any system.
 **AegisAgent** — Raising the security baseline for the next generation of intelligent systems.
 ```
 
+=======
+>>>>>>> e086ccf (Complete rename from AegisAgent to VeilForge)

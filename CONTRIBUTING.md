@@ -1,6 +1,6 @@
-# Contributing to AegisAgent
+# Contributing to VeilForge
 
-Thank you for your interest in contributing to AegisAgent!
+Thank you for your interest in contributing to VeilForge!
 
 This project is currently in early design / concept stage. We welcome feedback, ideas, and contributions.
 
@@ -43,7 +43,7 @@ Detailed setup instructions will be added as the project matures.
 
 ## Ethical Guidelines
 All contributions must respect the project's ethical use policy.
-AegisAgent is intended only for authorized security testing, research, and education.
+VeilForge is intended only for authorized security testing, research, and education.
 
 ## Questions?
 Open an issue or start a discussion.

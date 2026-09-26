@@ -2,7 +2,7 @@
 
 ## Getting Help
 
-AegisAgent is currently in early design stage.
+VeilForge is currently in early design stage.
 
 ### Ways to Get Support
 

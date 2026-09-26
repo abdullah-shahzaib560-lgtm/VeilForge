@@ -20,7 +20,7 @@ We will acknowledge the report and work to address it as quickly as possible.
 
 ## Responsible Use of VeilForge
 
-AegisAgent is intended **only** for:
+VeilForge is intended **only** for:
 
 - Authorized security testing
 - Research
@@ -37,4 +37,4 @@ Proxy, Tor, and anonymity features are provided solely to support legitimate ope
 - Do not use this tool for illegal activities
 - Follow responsible disclosure practices
 
-Thank you for helping keep AegisAgent and the wider community safe.
+Thank you for helping keep VeilForge and the wider community safe.
