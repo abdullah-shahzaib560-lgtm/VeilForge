@@ -63,7 +63,6 @@ def _build_connector(provider: str, target: str, proxy: str | None = None):
         f"Unknown provider '{provider}'. Supported: ollama, dummy"
     )
 
-
 async def _run_scan(provider: str, target: str, proxy: str | None, verbose: bool) -> int:
     connector = _build_connector(provider, target, proxy)
 
@@ -79,8 +78,16 @@ async def _run_scan(provider: str, target: str, proxy: str | None, verbose: bool
     table.add_column("Reason")
 
     for r in result.results:
-        outcome = "[bold red]VULNERABLE[/bold red]" if r.attack_succeeded else "[green]OK[/green]"
-        table.add_row(r.probe_name, r.severity, outcome, r.reason or r.error or "")
+        if r.error:
+            outcome = "[bold yellow]ERROR[/bold yellow]"
+            detail = r.error
+        elif r.attack_succeeded:
+            outcome = "[bold red]VULNERABLE[/bold red]"
+            detail = r.reason or ""
+        else:
+            outcome = "[green]OK[/green]"
+            detail = r.reason or ""
+        table.add_row(r.probe_name, r.severity, outcome, detail)
 
     console.print(table)
 
@@ -102,7 +109,6 @@ async def _run_scan(provider: str, target: str, proxy: str | None, verbose: bool
             console.print(f"\n[dim]Prompt:[/dim] {r.prompt}")
             console.print(f"[dim]Response:[/dim] {r.response}")
 
-    # Return non-zero if any attack succeeded (useful for CI)
     return 1 if result.succeeded > 0 else 0
 
 
@@ -118,23 +124,6 @@ def scan(
     """
     exit_code = asyncio.run(_run_scan(provider, target, proxy, verbose))
     raise typer.Exit(code=exit_code)
-
-
-@app.command()
-def scan(
-    target: str = typer.Argument(..., help="Model name (Ollama) or fixed reply text (dummy)"),
-    provider: str = typer.Option("ollama", "--provider", help="Connector to use: ollama or dummy"),
-    proxy: str = typer.Option(None, "--proxy", "-p", help="Proxy URL (e.g. socks5://127.0.0.1:9050) - not wired up yet"),
-    verbose: bool = typer.Option(False, "--verbose", "-v", help="Show every prompt and response"),
-):
-    """
-    Run VeilForge's prompt injection probes against a target.
-    """
-    if proxy:
-        console.print("[yellow]Note: --proxy is not connected to the scan engine yet.[/yellow]")
-
-    asyncio.run(_run_scan(provider, target, verbose))
-
 
 if __name__ == "__main__":
     app()
