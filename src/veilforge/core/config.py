@@ -1,17 +1,17 @@
 """
-Basic configuration handling for AegisAgent.
+Basic configuration handling for VeilForge.
 """
 
 from pydantic import BaseModel
 from typing import Optional
 
 
-class AegisConfig(BaseModel):
+class VeilConfig(BaseModel):
     """Main configuration model."""
-    
+
     # Target
     target_url: Optional[str] = None
-    target_type: str = "openai"          # openai, anthropic, custom, etc.
+    target_type: str = "ollama"          # ollama, dummy, openai, etc.
 
     # Privacy
     proxy_enabled: bool = False
@@ -27,6 +27,6 @@ class AegisConfig(BaseModel):
     timeout: float = 30.0
 
 
-def load_config() -> AegisConfig:
+def load_config() -> VeilConfig:
     """Load configuration (placeholder for now)."""
-    return AegisConfig()
+    return VeilConfig()

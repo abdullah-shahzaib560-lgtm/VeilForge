@@ -1,12 +1,5 @@
-"""
-Network / Privacy Layer - Proxy support for VeilForge.
-
-This module will handle HTTP, HTTPS, SOCKS5 proxies,
-proxy chaining, and optional Tor routing.
-"""
-
 from typing import Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -14,7 +7,7 @@ class ProxyConfig:
     """Configuration for proxy usage."""
     enabled: bool = False
     proxy_url: Optional[str] = None          # e.g. socks5://127.0.0.1:9050
-    chain: Optional[list[str]] = None        # list of proxy URLs for chaining
+    chain: list[str] = field(default_factory=list)
     use_tor: bool = False
     timeout: float = 30.0
 
@@ -22,24 +15,26 @@ class ProxyConfig:
 class ProxyManager:
     """
     Manages proxy configuration for outbound requests.
+    Compatible with httpx.
     """
 
     def __init__(self, config: Optional[ProxyConfig] = None):
         self.config = config or ProxyConfig()
 
-    def get_proxy_settings(self) -> dict:
-        """Return proxy settings compatible with httpx / aiohttp."""
+    def get_httpx_proxy(self) -> Optional[str]:
+        """Return a single proxy URL for httpx, or None."""
         if not self.config.enabled:
-            return {}
+            return None
 
         if self.config.use_tor:
-            # Default Tor SOCKS port
-            return {"proxy": "socks5://127.0.0.1:9050"}
+            return "socks5://127.0.0.1:9050"
 
         if self.config.proxy_url:
-            return {"proxy": self.config.proxy_url}
+            return self.config.proxy_url
 
-        return {}
+        return None
 
     def is_enabled(self) -> bool:
-        return self.config.enabled
+        return self.config.enabled and (
+            self.config.use_tor or bool(self.config.proxy_url)
+        )
