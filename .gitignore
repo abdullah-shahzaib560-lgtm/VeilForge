@@ -33,3 +33,4 @@ reports/
 *.pem
 secrets/
 .env.local
+reports/
