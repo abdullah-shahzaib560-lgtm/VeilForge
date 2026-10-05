@@ -1,8 +1,5 @@
 """
-JSON report writer.
-
-Takes a CampaignResult and saves it as a JSON file that people
-(or other tools, like CI pipelines) can read.
+JSON report writer for VeilForge.
 """
 
 import json
@@ -20,7 +17,11 @@ def write_json_report(result: CampaignResult, output_dir: str = "reports") -> Pa
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     path = folder / f"veilforge_report_{stamp}.json"
 
+    data = result.to_dict()
+    data["tool"] = "VeilForge"
+    data["report_version"] = "1.0"
+
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(result.to_dict(), f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
     return path

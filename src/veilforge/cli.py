@@ -15,6 +15,7 @@ from veilforge.connectors.ollama import OllamaConnector
 from veilforge.core.campaign import Campaign
 from veilforge.probes.prompt_injection import ALL_PROBES
 from veilforge.reporting.json_report import write_json_report
+from veilforge.reporting.html_report import write_html_report
 
 app = typer.Typer(
     name="veilforge",
@@ -101,8 +102,10 @@ async def _run_scan(provider: str, target: str, proxy: str | None, verbose: bool
     if result.by_severity():
         console.print("By severity:", result.by_severity())
 
-    path = write_json_report(result)
-    console.print(f"\n[bold]Full report saved to:[/bold] [cyan]{path}[/cyan]")
+    json_path = write_json_report(result)
+    html_path = write_html_report(result)
+    console.print(f"\n[bold]JSON report:[/bold] [cyan]{json_path}[/cyan]")
+    console.print(f"[bold]HTML report:[/bold] [cyan]{html_path}[/cyan]")
 
     if verbose:
         for r in result.results:
