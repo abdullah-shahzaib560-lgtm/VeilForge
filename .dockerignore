@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+reports/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+tests/
+*.md
+!README.md
+!LICENSE

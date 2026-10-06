@@ -1,0 +1,10 @@
+services:
+  veilforge:
+    build: .
+    container_name: veilforge
+    volumes:
+      - ./reports:/app/reports
+    network_mode: host
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["info"]
