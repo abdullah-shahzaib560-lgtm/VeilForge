@@ -19,7 +19,7 @@ class OllamaConnector(Connector):
         model: str = "llama3.2",
         base_url: str = "http://127.0.0.1:11434",
         system_prompt: Optional[str] = None,
-        timeout: float = 60.0,
+        timeout: float = 120.0,
         proxy_url: Optional[str] = None,
         use_tor: bool = False,
     ):

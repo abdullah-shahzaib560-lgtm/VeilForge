@@ -54,18 +54,29 @@ Large Language Models (LLMs) and autonomous AI agents.
     console.print(Panel(info_text, title="VeilForge Info", border_style="blue"))
 
 
-def _build_connector(provider: str, target: str, proxy: str | None = None):
+def _build_connector(
+    provider: str,
+    target: str,
+    proxy: str | None = None,
+    timeout: float = 120.0,
+):
     """Create the right connector for the chosen provider."""
     if provider == "ollama":
-        return OllamaConnector(model=target, proxy_url=proxy)
+        return OllamaConnector(model=target, proxy_url=proxy, timeout=timeout)
     if provider == "dummy":
         return DummyConnector(response=target)
     raise typer.BadParameter(
         f"Unknown provider '{provider}'. Supported: ollama, dummy"
     )
 
-async def _run_scan(provider: str, target: str, proxy: str | None, verbose: bool) -> int:
-    connector = _build_connector(provider, target, proxy)
+async def _run_scan(
+    provider: str,
+    target: str,
+    proxy: str | None,
+    verbose: bool,
+    timeout: float = 120.0,
+) -> int:
+    connector = _build_connector(provider, target, proxy, timeout)
 
     with console.status(f"[bold yellow]Running {len(ALL_PROBES)} probes against {target}..."):
         result = await Campaign(connector, ALL_PROBES).run()
@@ -114,18 +125,18 @@ async def _run_scan(provider: str, target: str, proxy: str | None, verbose: bool
 
     return 1 if result.succeeded > 0 else 0
 
-
 @app.command()
 def scan(
     target: str = typer.Argument(..., help="Model name (Ollama) or fixed reply text (dummy)"),
     provider: str = typer.Option("ollama", "--provider", help="Connector to use: ollama or dummy"),
     proxy: str = typer.Option(None, "--proxy", "-p", help="Proxy URL (e.g. socks5://127.0.0.1:9050)"),
+    timeout: float = typer.Option(120.0, "--timeout", "-t", help="Request timeout in seconds"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Show every prompt and response"),
 ):
     """
     Run VeilForge's prompt injection probes against a target.
     """
-    exit_code = asyncio.run(_run_scan(provider, target, proxy, verbose))
+    exit_code = asyncio.run(_run_scan(provider, target, proxy, verbose, timeout))
     raise typer.Exit(code=exit_code)
 
 if __name__ == "__main__":
