@@ -1,36 +1,38 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Distribution / packaging
-.Python
-build/
-dist/
-*.egg-info/
-*.egg
-
-# Environments
+# Environment / secrets
 .env
-.venv
-env/
-venv/
-
-# IDE
-.idea/
-.vscode/
-*.swp
-
-# Project specific
-*.log
-logs/
-output/
-reports/
-.DS_Store
-
-# Secrets
+.env.local
+.env.*.local
 *.key
 *.pem
 secrets/
-.env.local
+credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Reports (optional - remove this line if you want to commit reports)
 reports/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+*.swo
+
+# Testing / cache
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Docker
+*.log
