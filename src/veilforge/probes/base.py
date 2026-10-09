@@ -49,39 +49,44 @@ class Probe(ABC):
         """
         raise NotImplementedError
 
-    async def run(self, connector: Connector) -> list[ProbeResult]:
-        """Send every prompt to the target and collect the results."""
-        results = []
+   async def run(self, connector: Connector, delay: float = 1.5) -> list[ProbeResult]:
+    """Send every prompt to the target and collect the results."""
+    import asyncio
 
-        for prompt in self.prompts:
-            connector.reset()
-            response = await connector.send(prompt)
+    results = []
 
-            if not response.ok:
-                results.append(
-                    ProbeResult(
-                        probe_name=self.name,
-                        category=self.category,
-                        severity=self.severity,
-                        prompt=prompt,
-                        response="",
-                        attack_succeeded=False,
-                        error=response.error,
-                    )
-                )
-                continue
+    for i, prompt in enumerate(self.prompts):
+        if i > 0 and delay > 0:
+            await asyncio.sleep(delay)
 
-            succeeded, reason = self.detect(response.text)
+        connector.reset()
+        response = await connector.send(prompt)
+
+        if not response.ok:
             results.append(
                 ProbeResult(
                     probe_name=self.name,
                     category=self.category,
                     severity=self.severity,
                     prompt=prompt,
-                    response=response.text,
-                    attack_succeeded=succeeded,
-                    reason=reason,
+                    response="",
+                    attack_succeeded=False,
+                    error=response.error,
                 )
             )
+            continue
 
-        return results
+        succeeded, reason = self.detect(response.text)
+        results.append(
+            ProbeResult(
+                probe_name=self.name,
+                category=self.category,
+                severity=self.severity,
+                prompt=prompt,
+                response=response.text,
+                attack_succeeded=succeeded,
+                reason=reason,
+            )
+        )
+
+    return results

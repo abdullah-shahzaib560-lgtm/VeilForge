@@ -1,7 +1,7 @@
-"""
-VeilForge Command Line Interface
-"""
+from dotenv import load_dotenv
+load_dotenv()
 
+from veilforge.connectors.gemini import GeminiConnector
 import asyncio
 
 import typer
@@ -65,8 +65,10 @@ def _build_connector(
         return OllamaConnector(model=target, proxy_url=proxy, timeout=timeout)
     if provider == "dummy":
         return DummyConnector(response=target)
+    if provider == "gemini":
+        return GeminiConnector(model=target, timeout=timeout)
     raise typer.BadParameter(
-        f"Unknown provider '{provider}'. Supported: ollama, dummy"
+        f"Unknown provider '{provider}'. Supported: ollama, dummy, gemini"
     )
 
 async def _run_scan(
@@ -128,7 +130,7 @@ async def _run_scan(
 @app.command()
 def scan(
     target: str = typer.Argument(..., help="Model name (Ollama) or fixed reply text (dummy)"),
-    provider: str = typer.Option("ollama", "--provider", help="Connector to use: ollama or dummy"),
+    provider: str = typer.Option("ollama", "--provider", help="Connector to use: ollama, dummy, or gemini"),
     proxy: str = typer.Option(None, "--proxy", "-p", help="Proxy URL (e.g. socks5://127.0.0.1:9050)"),
     timeout: float = typer.Option(120.0, "--timeout", "-t", help="Request timeout in seconds"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Show every prompt and response"),
