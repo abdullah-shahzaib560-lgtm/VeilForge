@@ -2,253 +2,97 @@
 
 **Autonomous AI Red Teaming & Agentic Security Assessment Platform**
 
-![Status](https://img.shields.io/badge/Status-Concept%20%2F%20Early%20Design-orange)
-![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
+[![Status](https://img.shields.io/badge/Status-Active%20Development-blue)]()
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue)]()
+[![License](https://img.shields.io/badge/License-MIT-green)]()
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue)]()
 
-VeilForge is an open-core platform for systematically testing and securing **Large Language Models (LLMs)** and **autonomous AI agents**. It focuses on the emerging attack surface created by tool-using, multi-agent, and memory-enabled AI systems.
+VeilForge is an open-core platform built to systematically attack and assess **Large Language Models (LLMs)** and **autonomous AI agents** before real adversaries do.
 
-> **Current Status:** Concept / Early Design — no functional release yet.
-> **Goal:** Help security teams, red teamers, and AI engineers discover prompt injection, tool abuse, memory poisoning, goal hijacking, and related risks — before real attackers do.
+It focuses on the new attack surface created by tool-using, multi-agent, memory-enabled, and highly autonomous AI systems.
 
----
-
-## Table of Contents
-
-- [Why VeilForge?](#why-veilforge)
-- [Core Capabilities](#core-capabilities)
-- [High-Level Architecture](#high-level-architecture)
-- [Target Users](#target-users)
-- [Technology Stack](#technology-stack-planned)
-- [Development Roadmap](#development-roadmap)
-- [Related Work](#related-work)
-- [Ethical Use & Responsible Disclosure](#ethical-use--responsible-disclosure)
-- [Project Documents](#project-documents)
-- [Contributing](#contributing)
-- [License](#license)
-- [Disclaimer](#disclaimer)
+> **Current Status:** Early Active Development (Usable MVP)  
+> **Goal:** Become the standard open platform for AI red teaming and agentic security testing.
 
 ---
 
-## Why VeilForge?
+## Why VeilForge Exists
 
-Traditional application security tools were not designed for systems that:
+Traditional security tools were not designed for systems that:
 
-- Accept natural language instructions
+- Accept natural language as input
 - Call tools and APIs autonomously
 - Maintain long-term memory or RAG context
 - Operate with high agency
 
-As organizations deploy agentic AI into production, a new class of risks has appeared. Most teams still rely on manual testing or basic scanners. VeilForge is built to close this gap with automated and semi-automated adversarial testing, clear reporting, and continuous assessment capabilities.
+As organizations deploy agentic AI into production, a new class of risks has appeared:
+
+- Prompt injection (direct & indirect)
+- Jailbreaks and policy bypasses
+- Tool abuse and privilege escalation
+- Memory / RAG poisoning
+- Goal hijacking
+- System prompt extraction
+- Multi-agent trust exploitation
+
+Most teams still rely on manual testing or basic scanners.  
+**VeilForge closes this gap** with automated adversarial testing, clear reporting, and continuous assessment capabilities.
 
 ---
 
-## Core Capabilities
+## Vision
 
-### Offensive Testing
+VeilForge aims to become:
 
-- Automated and multi-turn attack campaigns against LLMs and AI agents
-- Coverage of direct & indirect prompt injection, jailbreaks, tool misuse, memory/RAG poisoning, goal hijacking, and data exfiltration
-- Extensible probe library (builds on and extends research tools such as Garak and PyRIT)
-- Simulation of realistic agent environments (tools, memory stores, RAG pipelines)
+- The go-to open-source platform for **AI red teaming**
+- A practical tool for both security teams and AI engineers
+- An open-core product with strong free capabilities and advanced commercial features
+- A bridge between classic offensive security and the new world of agentic AI
 
-### Analysis & Reporting
-
-- Automatic mapping of findings to:
-  - OWASP Top 10 for LLM Applications
-  - OWASP risks for Agentic AI
-  - NIST AI RMF
-  - EU AI Act considerations
-- Severity scoring and prioritization
-- Professional PDF and structured JSON reports
-- Attack path visualization
-
-### Integration & Continuous Testing
-
-- CI/CD plugins (GitHub Actions, GitLab CI, and others)
-- Scheduled continuous assessment mode
-- API access for integration into existing security workflows
-- Support for both self-hosted and cloud deployments
-
-### Privacy & Network Features
-
-- Built-in support for HTTP, HTTPS, and SOCKS5 proxies
-- Proxy chaining (multiple proxies in sequence)
-- Optional Tor routing
-- Per-campaign proxy configuration
-- Respects standard environment variables (`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, `SOCKS_PROXY`)
-- Designed to help maintain operational security (OPSEC) during authorized assessments
-
-> **Note:** Proxy and anonymity features do not make unauthorized testing legal. Always obtain explicit written permission before testing any system.
+Long-term direction includes multi-agent attack orchestration, continuous testing in CI/CD, professional reporting mapped to frameworks (OWASP LLM Top 10, NIST AI RMF, EU AI Act), and eventual web dashboard + team collaboration features.
 
 ---
 
-## High-Level Architecture
+## What Works Today (MVP)
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Presentation Layer                       │
-│         CLI  •  Web Dashboard  •  REST / API                │
-└────────────────────────────┬────────────────────────────────┘
-                              │
-┌─────────────────────────────▼───────────────────────────────┐
-│                   Orchestration Layer                        │
-│     Campaign Manager  •  Scheduler  •  Result Aggregator     │
-└────────────────────────────┬────────────────────────────────┘
-                              │
-┌─────────────────────────────▼───────────────────────────────┐
-│                     Attack Engine                             │
-│   Probe Library  •  Multi-turn Runners  •  Agent Simulators  │
-└────────────────────────────┬────────────────────────────────┘
-                              │
-┌─────────────────────────────▼───────────────────────────────┐
-│               Network / Privacy Layer                        │
-│     HTTP/SOCKS5 Proxies  •  Proxy Chains  •  Tor Support     │
-└────────────────────────────┬────────────────────────────────┘
-                              │
-┌─────────────────────────────▼───────────────────────────────┐
-│                   Connector Layer                             │
-│   LLM Providers  •  Agent Frameworks  •  Custom Targets      │
-└────────────────────────────┬────────────────────────────────┘
-                              │
-┌─────────────────────────────▼───────────────────────────────┐
-│              Analysis, Scoring & Reporting                   │
-│   Framework Mapping  •  Severity  •  PDF / JSON Reports      │
-└───────────────────────────────────────────────────────────────┘
-```
+VeilForge already provides a working command-line platform:
+
+### Offensive Capabilities
+- Multiple prompt injection techniques
+- Jailbreak and role-play attacks
+- Instruction override attacks
+- Encoding / obfuscation bypasses
+- Refusal suppression
+- Payload splitting
+- Hypothetical / fictional framing attacks
+- System prompt extraction attempts
+- Unicode and multilingual injection
+
+### Connectors
+- **Ollama** (local models)
+- **Dummy** connector (for testing without a real model)
+
+### Reporting
+- Structured **JSON** reports
+- Clean **HTML** reports (open in browser)
+- Severity-based summary
+
+### Platform Features
+- Rich CLI with clear output
+- Configurable timeout
+- Proxy support (HTTP / SOCKS5)
+- Docker & Docker Compose support
+- Extensible probe system (easy to add new attacks)
 
 ---
 
-## Target Users
+## Quick Start
 
-| User Group | Benefit |
-|---|---|
-| AI / ML Security Engineers | Systematically test production AI agents |
-| Red Team & Offensive Security | Expand testing into the AI attack surface |
-| AppSec / Product Security Teams | Integrate AI testing into the SDLC and CI/CD |
-| Compliance & GRC Teams | Generate evidence mapped to emerging AI regulations |
-| Security Researchers & Educators | Explore techniques and train others |
+### 1. Install locally
 
----
-
-## Technology Stack (Planned)
-
-| Layer | Choices |
-|---|---|
-| Core Language | Python 3.11+ |
-| API Framework | FastAPI |
-| Frontend | Next.js + React + Tailwind |
-| Database | PostgreSQL + Redis |
-| Task Queue | Celery / ARQ or equivalent |
-| Agent Frameworks | LangChain, LlamaIndex, CrewAI, AutoGen |
-| LLM Interfaces | OpenAI, Anthropic, LiteLLM, Ollama, etc. |
-| Reporting | ReportLab / WeasyPrint + structured JSON |
-| Networking/Privacy | `httpx`, `aiohttp`, `python-socks`, Tor support |
-| Packaging | Docker + Docker Compose (later Helm) |
-
----
-
-## Development Roadmap
-
-### Phase 1 – MVP
-
-- CLI interface
-- Core probe set covering major agentic risks
-- Basic connectors (e.g. OpenAI + LangChain-style agents)
-- JSON + simple PDF reporting
-- Basic proxy support (HTTP / SOCKS5)
-- Docker Compose setup for local use
-- Clear extension points for new probes
-
-### Phase 2 – Advanced
-
-- Web dashboard
-- Multi-agent attack orchestration
-- Continuous testing mode
-- Proxy chaining + Tor support
-- Improved visualizations and CI/CD plugins
-- Better framework mapping and remediation guidance
-
-### Phase 3 – Product
-
-- Multi-tenant SaaS offering
-- Team collaboration features
-- Enterprise capabilities (SSO, private models, advanced compliance)
-- Managed assessment service option
-
----
-
-## Related Work
-
-VeilForge builds on and aims to complement existing excellent tools:
-
-| Tool | Strength | Limitation | How VeilForge Differs |
-|---|---|---|---|
-| **Garak** | Broad probe library, easy to run | Limited multi-agent & tool-use focus | Stronger focus on full agent workflows |
-| **PyRIT** | Excellent multi-turn orchestration | More of a framework than full platform | End-to-end reporting + CI/CD focus |
-| **Promptfoo** | Great for CI and eval | Less depth on agentic risks | Deeper agentic attack surface coverage |
-
-VeilForge's goal is not to replace these tools, but to provide a more complete **platform experience** focused on agentic systems, professional reporting, continuous testing, and operational privacy features.
-
----
-
-## Ethical Use & Responsible Disclosure
-
-VeilForge is intended **only** for:
-
-- Authorized security testing
-- Research
-- Education
-
-**Unauthorized testing of systems without explicit permission is strictly forbidden** and outside the scope of this project.
-
-Proxy, Tor, and anonymity features are provided solely to support legitimate operational security during authorized engagements. They do not provide any legal protection for unauthorized activity.
-
-A `SECURITY.md` file is included in this repository with instructions for reporting vulnerabilities in VeilForge itself.
-
-All users are expected to follow applicable laws, organizational policies, and responsible disclosure practices.
-
----
-
-## Project Documents
-
-Additional documentation available in this repository:
-
-- [Project Overview (PDF)](https://github.com/abdullah-shahzaib560-lgtm/VeilForge/blob/main/VeilForge_Project_Overview.pdf) – High-level explanation
-- [Technical Architecture (PDF)](https://github.com/abdullah-shahzaib560-lgtm/VeilForge/blob/main/VeilForge_Technical_Architecture.pdf) – Deeper technical design
-- [Monetization & Business Potential (PDF)](https://github.com/abdullah-shahzaib560-lgtm/VeilForge/blob/main/VeilForge_Monetization_Business.pdf) – Strategy notes
-
----
-
-## Contributing
-
-This project is currently in early design.
-
-Once the initial repository structure is ready, contributions will be welcome in the following areas:
-
-- New attack probes and techniques
-- Connectors for additional agent frameworks
-- Detection and scoring improvements
-- Privacy / proxy related improvements
-- Documentation, examples, and tutorials
-- Testing and feedback
-
-See `CONTRIBUTING.md` for details (in progress).
-
----
-
-## License
-
-The core VeilForge engine, probe library, and CLI are released under the **MIT License** (see `LICENSE`).
-
-Advanced enterprise features (planned for later phases — e.g. SSO, private model support, advanced compliance reporting, managed hosting) will be offered under a separate commercial license as part of an **open-core** model. The open-source core will always remain free to use, modify, and self-host under MIT terms.
-
----
-
-## Disclaimer
-
-This software is provided for defensive security research and authorized testing only. The authors and contributors assume no liability for misuse. Always obtain proper written authorization before testing any system.
-
----
-
-**VeilForge** — Raising the security baseline for the next generation of intelligent systems.
+```bash
+git clone https://github.com/abdullah-shahzaib560-lgtm/VeilForge.git
+cd VeilForge
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
