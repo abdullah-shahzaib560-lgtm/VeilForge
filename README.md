@@ -27,7 +27,7 @@ Traditional security tools were not designed for systems that:
 
 As organizations deploy agentic AI into production, a new class of risks has appeared:
 
-- Prompt injection (direct & indirect)
+- Prompt injection (direct and indirect)
 - Jailbreaks and policy bypasses
 - Tool abuse and privilege escalation
 - Memory / RAG poisoning
@@ -81,7 +81,7 @@ VeilForge already provides a working command-line platform:
 - Rich CLI with clear output
 - Configurable timeout
 - Proxy support (HTTP / SOCKS5)
-- Docker & Docker Compose support
+- Docker and Docker Compose support
 - Extensible probe system (easy to add new attacks)
 
 ---
@@ -90,149 +90,157 @@ VeilForge already provides a working command-line platform:
 
 ### 1. Install locally
 
-'''bash
-git clone https://github.com/abdullah-shahzaib560-lgtm/VeilForge.git
-cd VeilForge
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .'''
+    git clone https://github.com/abdullah-shahzaib560-lgtm/VeilForge.git
+    cd VeilForge
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install -e .
 
-2. Run a scan
-Bash# Against a local Ollama model
-veilforge scan llama3.2:1b --provider ollama
+### 2. Run a scan
 
-# With verbose output
-veilforge scan llama3.2:1b --provider ollama -v
+- Against a local Ollama model:
 
-# Using dummy provider (no real model needed)
-veilforge scan "I follow all rules" --provider dummy -v
+      veilforge scan llama3.2:1b --provider ollama
 
-# Custom timeout
-veilforge scan llama3.2:1b --provider ollama --timeout 180
-3. View reports
-After every scan, reports are saved in the reports/ folder:
+- With verbose output:
 
-veilforge_report_YYYYMMDD_HHMMSS.json
-veilforge_report_YYYYMMDD_HHMMSS.html
+      veilforge scan llama3.2:1b --provider ollama -v
+
+- Using dummy provider (no real model needed):
+
+      veilforge scan "I follow all rules" --provider dummy -v
+
+- Custom timeout:
+
+      veilforge scan llama3.2:1b --provider ollama --timeout 180
+
+### 3. View reports
+
+After every scan, reports are saved in the `reports/` folder:
+
+- `veilforge_report_YYYYMMDD_HHMMSS.json`
+- `veilforge_report_YYYYMMDD_HHMMSS.html`
 
 Open the HTML file in any browser.
 
-Docker Usage
-Bash# Build
-docker compose build
+---
 
-# Run help
-docker compose run --rm veilforge --help
+## Docker Usage
 
-# Run a scan (Ollama must be reachable on the host)
-docker compose run --rm veilforge scan llama3.2:1b --provider ollama
+    docker compose build
+    docker compose run --rm veilforge --help
+    docker compose run --rm veilforge scan llama3.2:1b --provider ollama
 
-High-Level Architecture
-text┌─────────────────────────────────────────────────────────────┐
-│                    Presentation Layer                       │
-│              CLI  •  (Future: Web Dashboard)                │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│                   Orchestration Layer                       │
-│              Campaign Manager  •  Result Aggregator         │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│                     Attack Engine                           │
-│         Probe Library  •  Multi-prompt Runners              │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│               Network / Privacy Layer                       │
-│          HTTP/SOCKS5 Proxies  •  (Future: Tor)              │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│                   Connector Layer                           │
-│         Ollama  •  Dummy  •  (Future: OpenAI, etc.)         │
-└────────────────────────────┬────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────┐
-│              Analysis, Scoring & Reporting                  │
-│           JSON  •  HTML  •  (Future: PDF, Frameworks)       │
-└─────────────────────────────────────────────────────────────┘
+---
 
-Roadmap
-Phase 1 – MVP (Current)
+## High-Level Architecture
 
- CLI interface
- Core probe library
- Ollama + Dummy connectors
- JSON + HTML reporting
- Basic proxy support
- Docker support
- Extensible probe system
+    Presentation Layer
+        CLI  |  (Future: Web Dashboard)
+                |
+    Orchestration Layer
+        Campaign Manager  |  Result Aggregator
+                |
+    Attack Engine
+        Probe Library  |  Multi-prompt Runners
+                |
+    Network / Privacy Layer
+        HTTP/SOCKS5 Proxies  |  (Future: Tor)
+                |
+    Connector Layer
+        Ollama  |  Dummy  |  (Future: OpenAI, etc.)
+                |
+    Analysis, Scoring and Reporting
+        JSON  |  HTML  |  (Future: PDF, Frameworks)
 
-Phase 2 – Expansion
+---
 
- OpenAI / Anthropic connectors
- Stronger detection logic
- More attack categories (tool abuse, memory poisoning)
- CI/CD integration examples
- Improved reporting & severity scoring
+## Roadmap
 
-Phase 3 – Platform
+### Phase 1 - MVP (Current)
+- [x] CLI interface
+- [x] Core probe library
+- [x] Ollama + Dummy connectors
+- [x] JSON + HTML reporting
+- [x] Basic proxy support
+- [x] Docker support
+- [x] Extensible probe system
 
- Web dashboard
- Multi-agent attack orchestration
- Continuous testing mode
- Framework mapping (OWASP LLM, NIST AI RMF)
- Team collaboration features
+### Phase 2 - Expansion
+- [ ] OpenAI / Anthropic connectors
+- [ ] Stronger detection logic
+- [ ] More attack categories (tool abuse, memory poisoning)
+- [ ] CI/CD integration examples
+- [ ] Improved reporting and severity scoring
 
-Phase 4 – Product
+### Phase 3 - Platform
+- [ ] Web dashboard
+- [ ] Multi-agent attack orchestration
+- [ ] Continuous testing mode
+- [ ] Framework mapping (OWASP LLM, NIST AI RMF)
+- [ ] Team collaboration features
 
- Multi-tenant SaaS option
- Enterprise features (SSO, private models)
- Managed assessment offerings
+### Phase 4 - Product
+- [ ] Multi-tenant SaaS option
+- [ ] Enterprise features (SSO, private models)
+- [ ] Managed assessment offerings
 
+---
 
-Documentation
-More detailed docs are available in the docs/ [blocked] folder:
+## Documentation
 
-Architecture [blocked]
-Probes [blocked]
-Connectors [blocked]
-Usage Guide [blocked]
+More detailed docs are available in the [docs/](docs/) folder:
 
+- [Architecture](docs/architecture.md)
+- [Probes](docs/probes.md)
+- [Connectors](docs/connectors.md)
+- [Usage Guide](docs/usage.md)
 
-Ethical Use
-VeilForge is intended only for:
+---
 
-Authorized security testing
-Research
-Education
+## Ethical Use
 
-Unauthorized testing of systems without explicit permission is strictly forbidden.
+VeilForge is intended **only** for:
+
+- Authorized security testing
+- Research
+- Education
+
+**Unauthorized testing of systems without explicit permission is strictly forbidden.**
+
 Proxy and anonymity features exist only to support legitimate operational security during authorized engagements. They do not make unauthorized activity legal.
-See SECURITY.md [blocked] for responsible disclosure guidelines.
 
-Contributing
+See [SECURITY.md](SECURITY.md) for responsible disclosure guidelines.
+
+---
+
+## Contributing
+
 This project is in active early development. Contributions are welcome in:
 
-New attack probes and techniques
-Additional model / agent connectors
-Detection improvements
-Documentation and examples
-Testing and feedback
+- New attack probes and techniques
+- Additional model / agent connectors
+- Detection improvements
+- Documentation and examples
+- Testing and feedback
 
-See CONTRIBUTING.md [blocked] for details.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-License
-This project is licensed under the MIT License.
+---
 
-See the LICENSE [blocked] file for details.
+## License
 
-Disclaimer
-This software is provided for defensive security research and authorized testing only.
+This project is licensed under the **MIT License**.  
+See the [LICENSE](LICENSE) file for details.
 
-The authors and contributors assume no liability for misuse.
+---
 
+## Disclaimer
+
+This software is provided for defensive security research and authorized testing only.  
+The authors and contributors assume no liability for misuse.  
 Always obtain proper written authorization before testing any system.
 
-VeilForge — Raising the security baseline for the next generation of intelligent systems.
+---
+
+**VeilForge** — Raising the security baseline for the next generation of intelligent systems.
