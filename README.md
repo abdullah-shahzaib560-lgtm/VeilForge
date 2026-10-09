@@ -96,3 +96,142 @@ cd VeilForge
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
+2. Run a scan
+Bash# Against a local Ollama model
+veilforge scan llama3.2:1b --provider ollama
+
+# With verbose output
+veilforge scan llama3.2:1b --provider ollama -v
+
+# Using dummy provider (no real model needed)
+veilforge scan "I follow all rules" --provider dummy -v
+
+# Custom timeout
+veilforge scan llama3.2:1b --provider ollama --timeout 180
+3. View reports
+After every scan, reports are saved in the reports/ folder:
+
+veilforge_report_YYYYMMDD_HHMMSS.json
+veilforge_report_YYYYMMDD_HHMMSS.html
+
+Open the HTML file in any browser.
+
+Docker Usage
+Bash# Build
+docker compose build
+
+# Run help
+docker compose run --rm veilforge --help
+
+# Run a scan (Ollama must be reachable on the host)
+docker compose run --rm veilforge scan llama3.2:1b --provider ollama
+
+High-Level Architecture
+text┌─────────────────────────────────────────────────────────────┐
+│                    Presentation Layer                       │
+│              CLI  •  (Future: Web Dashboard)                │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────┐
+│                   Orchestration Layer                       │
+│              Campaign Manager  •  Result Aggregator         │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────┐
+│                     Attack Engine                           │
+│         Probe Library  •  Multi-prompt Runners              │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────┐
+│               Network / Privacy Layer                       │
+│          HTTP/SOCKS5 Proxies  •  (Future: Tor)              │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────┐
+│                   Connector Layer                           │
+│         Ollama  •  Dummy  •  (Future: OpenAI, etc.)         │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────┐
+│              Analysis, Scoring & Reporting                  │
+│           JSON  •  HTML  •  (Future: PDF, Frameworks)       │
+└─────────────────────────────────────────────────────────────┘
+
+Roadmap
+Phase 1 – MVP (Current)
+
+ CLI interface
+ Core probe library
+ Ollama + Dummy connectors
+ JSON + HTML reporting
+ Basic proxy support
+ Docker support
+ Extensible probe system
+
+Phase 2 – Expansion
+
+ OpenAI / Anthropic connectors
+ Stronger detection logic
+ More attack categories (tool abuse, memory poisoning)
+ CI/CD integration examples
+ Improved reporting & severity scoring
+
+Phase 3 – Platform
+
+ Web dashboard
+ Multi-agent attack orchestration
+ Continuous testing mode
+ Framework mapping (OWASP LLM, NIST AI RMF)
+ Team collaboration features
+
+Phase 4 – Product
+
+ Multi-tenant SaaS option
+ Enterprise features (SSO, private models)
+ Managed assessment offerings
+
+
+Documentation
+More detailed docs are available in the docs/ [blocked] folder:
+
+Architecture [blocked]
+Probes [blocked]
+Connectors [blocked]
+Usage Guide [blocked]
+
+
+Ethical Use
+VeilForge is intended only for:
+
+Authorized security testing
+Research
+Education
+
+Unauthorized testing of systems without explicit permission is strictly forbidden.
+Proxy and anonymity features exist only to support legitimate operational security during authorized engagements. They do not make unauthorized activity legal.
+See SECURITY.md [blocked] for responsible disclosure guidelines.
+
+Contributing
+This project is in active early development. Contributions are welcome in:
+
+New attack probes and techniques
+Additional model / agent connectors
+Detection improvements
+Documentation and examples
+Testing and feedback
+
+See CONTRIBUTING.md [blocked] for details.
+
+License
+This project is licensed under the MIT License.
+
+See the LICENSE [blocked] file for details.
+
+Disclaimer
+This software is provided for defensive security research and authorized testing only.
+
+The authors and contributors assume no liability for misuse.
+
+Always obtain proper written authorization before testing any system.
+
+VeilForge — Raising the security baseline for the next generation of intelligent systems.
