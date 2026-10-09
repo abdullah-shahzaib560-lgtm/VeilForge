@@ -90,12 +90,13 @@ VeilForge already provides a working command-line platform:
 
 ### 1. Install locally
 
-```bash
+'''bash
 git clone https://github.com/abdullah-shahzaib560-lgtm/VeilForge.git
 cd VeilForge
 python -m venv .venv
 source .venv/bin/activate
-pip install -e .
+pip install -e .'''
+
 2. Run a scan
 Bash# Against a local Ollama model
 veilforge scan llama3.2:1b --provider ollama
