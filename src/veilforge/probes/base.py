@@ -6,6 +6,7 @@ prompts, sends them to a target through a Connector, and decides
 whether each attack succeeded.
 """
 
+import asyncio
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Optional
@@ -35,8 +36,8 @@ class Probe(ABC):
     """
 
     name: str = "base"
-    category: str = "uncategorized"    # e.g. "prompt_injection"
-    severity: str = "medium"           # low / medium / high / critical
+    category: str = "uncategorized"
+    severity: str = "medium"
     description: str = ""
     prompts: list[str] = []
 
@@ -49,44 +50,42 @@ class Probe(ABC):
         """
         raise NotImplementedError
 
-   async def run(self, connector: Connector, delay: float = 1.5) -> list[ProbeResult]:
-    """Send every prompt to the target and collect the results."""
-    import asyncio
+    async def run(self, connector: Connector, delay: float = 1.5) -> list[ProbeResult]:
+        """Send every prompt to the target and collect the results."""
+        results = []
 
-    results = []
+        for i, prompt in enumerate(self.prompts):
+            if i > 0 and delay > 0:
+                await asyncio.sleep(delay)
 
-    for i, prompt in enumerate(self.prompts):
-        if i > 0 and delay > 0:
-            await asyncio.sleep(delay)
+            connector.reset()
+            response = await connector.send(prompt)
 
-        connector.reset()
-        response = await connector.send(prompt)
+            if not response.ok:
+                results.append(
+                    ProbeResult(
+                        probe_name=self.name,
+                        category=self.category,
+                        severity=self.severity,
+                        prompt=prompt,
+                        response="",
+                        attack_succeeded=False,
+                        error=response.error,
+                    )
+                )
+                continue
 
-        if not response.ok:
+            succeeded, reason = self.detect(response.text)
             results.append(
                 ProbeResult(
                     probe_name=self.name,
                     category=self.category,
                     severity=self.severity,
                     prompt=prompt,
-                    response="",
-                    attack_succeeded=False,
-                    error=response.error,
+                    response=response.text,
+                    attack_succeeded=succeeded,
+                    reason=reason,
                 )
             )
-            continue
 
-        succeeded, reason = self.detect(response.text)
-        results.append(
-            ProbeResult(
-                probe_name=self.name,
-                category=self.category,
-                severity=self.severity,
-                prompt=prompt,
-                response=response.text,
-                attack_succeeded=succeeded,
-                reason=reason,
-            )
-        )
-
-    return results
+        return results
