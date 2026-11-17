@@ -1,14 +1,27 @@
 """
 Simple HTML report writer for VeilForge.
+
+Works with both the legacy CampaignResult and the new CampaignResult model.
 """
 
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
-from veilforge.core.campaign import CampaignResult
+
+def _result_reason(result: Any) -> str:
+    """Extract a human-readable reason from old or new-style results."""
+    reasons = [
+        finding.reason
+        for finding in getattr(result, "findings", [])
+        if getattr(finding, "attack_succeeded", False) and getattr(finding, "reason", "")
+    ]
+    if reasons:
+        return "; ".join(dict.fromkeys(reasons))
+    return getattr(result, "reason", "") or getattr(result, "error", "") or ""
 
 
-def write_html_report(result: CampaignResult, output_dir: str = "reports") -> Path:
+def write_html_report(result: Any, output_dir: str = "reports") -> Path:
     """Save a campaign result as a simple HTML report."""
     folder = Path(output_dir)
     folder.mkdir(parents=True, exist_ok=True)
@@ -28,7 +41,7 @@ def write_html_report(result: CampaignResult, output_dir: str = "reports") -> Pa
             status = "OK"
             color = "#5cb85c"
 
-        reason = r.reason or r.error or ""
+        reason = _result_reason(r)
         rows.append(f"""
         <tr>
             <td>{r.probe_name}</td>

@@ -21,6 +21,11 @@ veilforge scan llama3.2:1b --provider ollama -v
 veilforge scan llama3.2:1b --provider ollama --timeout 180
 veilforge scan "I follow all rules" --provider dummy -v
 
+# Gemini (set GEMINI_API_KEY first)
+export GEMINI_API_KEY=your_key_here
+veilforge scan gemini-2.0-flash --provider gemini
+veilforge scan gemini-2.0-flash --provider gemini -v
+
 ## Reports
 
 After every scan, reports are saved in the reports/ folder:

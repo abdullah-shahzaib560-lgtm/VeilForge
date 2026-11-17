@@ -70,6 +70,7 @@ VeilForge already provides a working command-line platform:
 
 ### Connectors
 - **Ollama** (local models)
+- **Gemini** (Google AI Studio / Gemini API)
 - **Dummy** connector (for testing without a real model)
 
 ### Reporting
@@ -110,6 +111,11 @@ VeilForge already provides a working command-line platform:
 
       veilforge scan "I follow all rules" --provider dummy -v
 
+- Against Google Gemini (requires `GEMINI_API_KEY`):
+
+      export GEMINI_API_KEY=your_key_here
+      veilforge scan gemini-2.0-flash --provider gemini
+
 - Custom timeout:
 
       veilforge scan llama3.2:1b --provider ollama --timeout 180
@@ -148,7 +154,7 @@ Open the HTML file in any browser.
         HTTP/SOCKS5 Proxies  |  (Future: Tor)
                 |
     Connector Layer
-        Ollama  |  Dummy  |  (Future: OpenAI, etc.)
+        Ollama  |  Gemini  |  Dummy  |  (Future: OpenAI, Anthropic, ...)
                 |
     Analysis, Scoring and Reporting
         JSON  |  HTML  |  (Future: PDF, Frameworks)
@@ -160,7 +166,7 @@ Open the HTML file in any browser.
 ### Phase 1 - MVP (Current)
 - [x] CLI interface
 - [x] Core probe library
-- [x] Ollama + Dummy connectors
+- [x] Ollama + Gemini + Dummy connectors
 - [x] JSON + HTML reporting
 - [x] Basic proxy support
 - [x] Docker support
